@@ -61,9 +61,7 @@ let
         chmod 640 ${settingsFile}
       '';
 
-      script = ''
-        ${startupScript}
-      '';
+      script = startupScript;
 
       serviceConfig = {
         Type = "simple";
@@ -79,7 +77,7 @@ let
         User = "matrix-as-${name}";
         Group = "matrix-as-${name}";
         WorkingDirectory = dataDir;
-        StateDirectory = "${baseNameOf dataDir}";
+        StateDirectory = baseNameOf dataDir;
         StateDirectoryMode = "0750";
         UMask = 0027;
       } // opts.serviceConfig;

@@ -47,14 +47,14 @@ options to
 In the preStart script of each appservice, a registration file is automatically
 generated with random strings for the important tokens and any data passed
 to the `registrationData` option. This file will be available to your `settings`
-and `startScript` as `$REGISTRATION_FILE`.
+and `startupScript` as `$REGISTRATION_FILE`.
 
 After this, a configuration file is generated based on the `settings` passed
 to the appservice. Environment variables are also substuted in with envsubst,
 so the `environmentFile` option can be used to pass secrets for the appservice.
 
 ### Environment Variables
-These variables are available in your `startScript` and `settings`(substituted in):
+These variables are available in your `startupScript` and `settings`(substituted in):
  - $REGISTRATION_FILE => The registration file generated automatically
  - $SETTINGS_FILE => Settings file generated
  - $DIR => Data directory of the appservice
