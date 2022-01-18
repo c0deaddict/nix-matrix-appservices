@@ -51,7 +51,7 @@ and `startupScript` as `$REGISTRATION_FILE`.
 
 After this, a configuration file is generated based on the `settings` passed
 to the appservice. Environment variables are also substuted in with envsubst,
-so the `environmentFile` option can be used to pass secrets for the appservice.
+so the `serviceConfig.EnvironmentFile` option can be used to pass secrets for the appservice.
 
 ### Environment Variables
 These variables are available in your `startupScript` and `settings`(substituted in):
@@ -60,6 +60,7 @@ These variables are available in your `startupScript` and `settings`(substituted
  - $DIR => Data directory of the appservice
  - $AS_TOKEN => Appservice token(needs to be kept secret)
  - $HS_TOKEN => Homeserver token(needs to be kept secret)
+ - Anything else in `serviceConfig.EnvironmentFile`
 
 ## Importing the module
 ### With Flakes
