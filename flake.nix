@@ -1,40 +1,37 @@
 {
   inputs = {
-    fup.url = "github:divnix/flake-utils-plus";
     devshell.url = "github:numtide/devshell";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
+    nixlib.url = "github:divnix/nixpkgs.lib";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, fup, devshell }:
-    fup.lib.mkFlake {
-      inherit self inputs;
+  outputs = inputs@{ self, nixlib, nixpkgs, devshell, ... }:
+    let
 
+      # Unofficial Flakes Roadmap - Polyfills
+      # This project is committed to the Unofficial Flakes Roadmap!
+      # .. see: https://demo.hedgedoc.org/s/_W6Ve03GK#
+
+      # Super Stupid Flakes (ssf) / System As an Input - Style:
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
+
+      polyfillOutput = loc: nixlib.lib.genAttrs supportedSystems (system:
+        import loc { inherit system inputs; }
+      );
+    in
+    {
 
       nixosModules.matrix-appservices = import ./module;
       nixosModule = self.nixosModules.matrix-appservices;
 
-      overlays.matrix-appservices = import ./pkgs;
+      overlays.matrix-appservices = final: prev: import ./pkgs { pkgs = prev; };
       overlay = self.overlays.matrix-appservices;
 
-      sharedOverlays = [
-        self.overlay
-        devshell.overlay
-      ];
+      packages = polyfillOutput ./packages.nix;
 
-      channels.pkgs.input = nixpkgs;
-
-      outputsBuilder = { pkgs }: {
-        packages = {
-          inherit (pkgs)
-            mx-puppet-groupme
-            mx-puppet-slack
-
-            mautrix-twitter
-            mautrix-instagram
-            ;
-        };
-        checks.matrix-appservices = import ./test.nix { inherit pkgs; }; 
-      };
+      checks = polyfillOutput ./test.nix;
     };
 }

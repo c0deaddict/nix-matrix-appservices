@@ -17,7 +17,7 @@ buildGoModule rec {
 
   doCheck = false;
 
-  runVend = true;
+  proxyVendor = true;
 
   postInstall = ''
     mv $out/bin/mautrix-wsproxy $out/bin/mautrix-wsproxy-bin
