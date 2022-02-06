@@ -32,6 +32,6 @@
 
       packages = polyfillOutput ./packages.nix;
 
-      checks = polyfillOutput ./test.nix;
+      checks = polyfillOutput ./checks.nix;
     };
 }
