@@ -1,0 +1,15 @@
+default:
+  image: nixos/nix:2.6.0
+  before_script:
+    - mkdir -p ~/.config/nix/
+    - echo "experimental-features = flakes nix-command" >> ~/.config/nix/nix.conf
+    - echo "accept-flake-config = true" >> ~/.config/nix/nix.conf
+    - echo "extra-system-features = kvm" >> ~/.config/nix/nix.conf
+
+check:
+  only:
+    - branches
+    - tags
+    - merge_requests
+  script:
+    - nix flake check
