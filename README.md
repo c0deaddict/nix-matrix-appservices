@@ -16,10 +16,12 @@ For example, here is how you would setup mautrix-whatsapp:
 { pkgs, ... }:
 {
   services.matrix-appservices = {
-    whatsapp = {
-      port = 29183;
-      format = "mautrix-go";
-      package = pkgs.mautrix-whatsapp;
+    services = {
+      whatsapp = {
+        port = 29183;
+        format = "mautrix-go";
+        package = pkgs.mautrix-whatsapp;
+      };
     };
   };
 }
