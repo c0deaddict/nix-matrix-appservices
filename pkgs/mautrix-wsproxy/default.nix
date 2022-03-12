@@ -13,7 +13,7 @@ buildGoModule rec {
 
   buildInputs = [ olm ];
 
-  vendorSha256 = "sha256-kJw3w14RQBAdMoFItjT/LmzuKaDTR09mW3H+7gNUS3s=";
+  vendorSha256 = "sha256-Gcm16SbmcnZc76TKyRV6wokznRiBb525WGFUYcor8SE=";
 
   doCheck = false;
 
