@@ -20,7 +20,7 @@ in
     
       nodes = {
         homeserver = { pkgs, ... }: {
-          imports = [ ./module ];
+          imports = [ ./modules/matrix-appservices ];
           services.dendrite = {
             enable = true;
             settings = {

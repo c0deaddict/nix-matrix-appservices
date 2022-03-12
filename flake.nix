@@ -25,7 +25,7 @@
     in
     {
 
-      nixosModules.matrix-appservices = import ./module;
+      nixosModules = import ./modules { };
       nixosModule = self.nixosModules.matrix-appservices;
 
       overlays.matrix-appservices = final: prev: import ./pkgs { pkgs = prev; };
