@@ -5,4 +5,5 @@
   mautrix-twitter = pkgs.callPackage ./mautrix-twitter { };
   mautrix-instagram = pkgs.callPackage ./mautrix-instagram { };
   mautrix-wsproxy = pkgs.callPackage ./mautrix-wsproxy { };
+  mautrix-syncproxy = pkgs.callPackage ./mautrix-syncproxy { };
 }
