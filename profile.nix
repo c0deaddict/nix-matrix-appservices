@@ -46,7 +46,7 @@ in
           SupplementaryGroups = [ "signald" ];
         };
         settings.signal = {
-          socket_path = "/run/signald/signald.sock";
+          socket_path = config.services.signald.socketPath;
           outgoing_attachment_dir = "/var/lib/signald/tmp";
         };
       };
