@@ -1,34 +1,14 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-let
-  cfg = config.services.matrix-appservices;
-  domain = cfg.homeserverDomain;
-in
 {
+  # Mautrix-signal settings
   services.signald.enable = true;
+  systemd.services.matrix-as-signal.requires = [ "signald.service" ];
+  systemd.services.matrix-as-signal.after = [ "signald.service" ];
 
   services.matrix-appservices = {
     addRegistrationFiles = true;
-
     services = {
-      discord = {
-        port = 29180;
-        format = "mx-puppet";
-        package = pkgs.mx-puppet-discord;
-        settings.bridge.enableGroupSync = true;
-      };
-      groupme = {
-        port = 29181;
-        format = "mx-puppet";
-        package = pkgs.mx-puppet-groupme;
-      };
-      slack = {
-        port = 29182;
-        format = "mx-puppet";
-        package = pkgs.mx-puppet-slack;
-      };
-
       whatsapp = {
         port = 29183;
         format = "mautrix-go";
@@ -39,7 +19,6 @@ in
         port = 29184;
         format = "mautrix-python";
         package = pkgs.mautrix-signal;
-        serviceDependencies = [ "signald.service" ];
         serviceConfig = {
           StateDirectory = [ "matrix-as-signal" "signald" ];
           JoinNamespaceOf = "signald.service";
@@ -68,6 +47,7 @@ in
         format = "mautrix-python";
         package = pkgs.mautrix-instagram;
       };
+
     };
   };
 }
