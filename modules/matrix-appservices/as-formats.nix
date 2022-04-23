@@ -7,7 +7,7 @@ let
     homeserverDomain;
   package = asConfig.package;
   pname = getName package;
-  command = "${package}/bin/${pname}";
+  command = "${package}/bin/${package.meta.mainProgram or pname}";
 
   mautrix = {
     startupScript = ''
