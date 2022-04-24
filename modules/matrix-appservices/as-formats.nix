@@ -11,8 +11,7 @@ let
 
   mautrix = {
     startupScript = ''
-      ${command} --config=$SETTINGS_FILE \
-        --registration=$REGISTRATION_FILE
+      ${command} --config=$SETTINGS_FILE
     '';
 
     settings = {
