@@ -35,6 +35,10 @@ If you would like the module to configure synapse or dendrite to
 include all appservice registration files you can just set:
 `services.matrix-appservices.addRegistrationFiles = true`.
 
+## Status
+I consider the module stable enough to use on my own server. Many of the packages available through the module are not stable. 
+Any appservice listed in the examples folder has been tested to work with this module. Optimally this module will work with non-tested appservices, but there are likely still quirks that haven't been dealt with. If you have any issues or get another appservice to work, please let me know with an issue or by chat.
+
 ## Configuring
 There are many options available to configure the way each appservice
 is setup. But to consolidate similarities, there are three formats
