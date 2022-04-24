@@ -15,6 +15,12 @@
         package = pkgs.mautrix-whatsapp;
       };
 
+      discord = {
+        port = 29188;
+        format = "mautrix-go";
+        package = pkgs.mautrix-discord;
+      };
+
       signal = {
         port = 29184;
         format = "mautrix-python";
