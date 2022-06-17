@@ -168,9 +168,11 @@ in
       let
         registrationFiles = mapAttrsToList (n: _: "/var/lib/matrix-as-${n}/${n}-registration.yaml")
           (filterAttrs (_: v: v.registrationData != { }) cfg.services);
+        newSynapseSettings = config.services.matrix-synapse ? settings;
       in
       mkIf cfg.addRegistrationFiles {
-        matrix-synapse.settings.app_service_config_files = mkIf (cfg.homeserver == "matrix-synapse") registrationFiles;
+        matrix-synapse.app_service_config_files = mkIf (cfg.homeserver == "matrix-synapse" && !newSynapseSettings) registrationFiles;
+        matrix-synapse.settings.app_service_config_files = mkIf (cfg.homeserver == "matrix-synapse" && newSynapseSettings) registrationFiles;
         dendrite.settings.app_service_api.config_files = mkIf (cfg.homeserver == "dendrite") registrationFiles;
       };
   };
