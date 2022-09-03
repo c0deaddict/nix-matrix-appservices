@@ -170,7 +170,7 @@ in
           (filterAttrs (_: v: v.registrationData != { }) cfg.services);
       in
       mkIf cfg.addRegistrationFiles {
-        matrix-synapse.app_service_config_files = mkIf (cfg.homeserver == "matrix-synapse") registrationFiles;
+        matrix-synapse.settings.app_service_config_files = mkIf (cfg.homeserver == "matrix-synapse") registrationFiles;
         dendrite.settings.app_service_api.config_files = mkIf (cfg.homeserver == "dendrite") registrationFiles;
       };
   };
