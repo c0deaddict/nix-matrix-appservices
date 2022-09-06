@@ -27,7 +27,7 @@
         package = pkgs.mautrix-signal;
         serviceConfig = {
           StateDirectory = [ "matrix-as-signal" "signald" ];
-          JoinNamespaceOf = "signald.service";
+          JoinsNamespaceOf = "signald.service";
           SupplementaryGroups = [ "signald" ];
         };
         settings.signal = {
