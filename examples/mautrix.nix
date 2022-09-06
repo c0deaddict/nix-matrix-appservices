@@ -3,12 +3,16 @@
 {
   # Mautrix-signal settings
   services.signald.enable = true;
-  systemd.services.matrix-as-signal.requires = [ "signald.service" ];
-  systemd.services.matrix-as-signal.after = [ "signald.service" ];
-  systemd.services.matrix-as-signal.unitConfig = {
-    JoinsNamespaceOf = "signald.service";
+  systemd.services.matrix-as-signal = {
+    requires = [ "signald.service" ];
+    after = [ "signald.service" ];
+    unitConfig = {
+      JoinsNamespaceOf = "signald.service";
+    };
+    path = [
+      pkgs.ffmpeg # voice messages need `ffmpeg`
+    ];
   };
-
 
   services.matrix-appservices = {
     addRegistrationFiles = true;
