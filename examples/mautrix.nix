@@ -5,6 +5,10 @@
   services.signald.enable = true;
   systemd.services.matrix-as-signal.requires = [ "signald.service" ];
   systemd.services.matrix-as-signal.after = [ "signald.service" ];
+  systemd.services.matrix-as-signal.unitConfig = {
+    JoinsNamespaceOf = "signald.service";
+  };
+
 
   services.matrix-appservices = {
     addRegistrationFiles = true;
@@ -27,7 +31,6 @@
         package = pkgs.mautrix-signal;
         serviceConfig = {
           StateDirectory = [ "matrix-as-signal" "signald" ];
-          JoinsNamespaceOf = "signald.service";
           SupplementaryGroups = [ "signald" ];
         };
         settings.signal = {
