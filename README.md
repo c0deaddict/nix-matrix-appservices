@@ -98,10 +98,10 @@ In your `configuration.nix` or any other profile/module:
 { pkgs, ... }:
 let
   nix-matrix-appservices = fetchTarball
-    "https://gitlab.com/coffeetables/nix-matrix-appservices/-/archive/master/myrdd-master.tar.gz";
+    "https://gitlab.com/coffeetables/nix-matrix-appservices/-/archive/main/main.tar.gz";
 {
   imports = [
-    "${nix-matrix-appservices}/module" 
+    (import "${nix-matrix-appservices}/modules" {}).matrix-appservices
   ];
 }
 ```
