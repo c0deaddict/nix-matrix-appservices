@@ -20,7 +20,6 @@ buildGoModule rec {
   proxyVendor = true;
 
   meta = with lib; {
-    mainProgram = "discord";
     homepage = "https://github.com/mautrix/discord";
     description = "Matrix <-> Discord hybrid puppeting/relaybot bridge";
     license = licenses.agpl3;
